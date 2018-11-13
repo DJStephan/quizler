@@ -91,12 +91,13 @@ const fillInQuestion = (array) => {
 }
 // TODO copy chooseRandom() from previous assignment
 const chooseRandom = (array = [], numItems) => {
+  
   if (array.length < 2) {
     return array
   }
 
-  if (array.length < numItems || numItems < 1) {
-    numItems = Math.floor(Math.random() * array.length) + 1
+  if (array.length < numItems || numItems < 1 || !numItems) {
+    numItems = Math.ceil(Math.random() * array.length)
   }
 
   let randomIndicies = []
@@ -109,13 +110,13 @@ const chooseRandom = (array = [], numItems) => {
       counter++
     }
   }
-
+  
   let returnArray = []
 
   for (let index of randomIndicies) {
     returnArray.push(array[index])
   }
-
+  
   return returnArray
 }
 
@@ -164,18 +165,7 @@ const createQuestions = (questions) => {
   return returnArray
 }
 
- console.log(createPrompt({}))
- console.log(createPrompt(undefined))
- console.log(createPrompt({numQuestions: 1, numChoices: 1}))
-
-console.log(createQuestions({'question-1': '',
-    'question-1-choice-1': '',
-    'question-1-choice-2': '',
-    'question-2': '',
-    'question-2-choice-1': '',
-    'question-2-choice-2': ''}))
-
-export {chooseRandom, createPrompt, createQuestions}
+export {readFile, writeFile, chooseRandom, createPrompt, createQuestions}
 
 // TODO copy your readFile, writeFile, chooseRandom, createPrompt, and createQuestions
 // functions from your notes and assignments.
